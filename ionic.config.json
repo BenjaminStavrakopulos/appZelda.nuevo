@@ -1,0 +1,7 @@
+{
+  "name": "appZelda",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
