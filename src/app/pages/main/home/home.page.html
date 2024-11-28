@@ -1,0 +1,52 @@
+<app-header [showMenu]="true" title="inicio"></app-header>
+
+
+<ion-content>
+
+<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+</ion-refresher>
+
+
+    <ion-list>
+        <ion-item-sliding class="product-item" *ngFor="let p of products">
+            <ion-item>
+                <ion-avatar slot="start">
+                    <img [src]="p.image" />
+                </ion-avatar>
+                <ion-label>
+                   <div class="name">{{p.name}}</div> 
+                   <div class="data">
+                    <strong style="font-weight: bold; color: blue;">que es?:</strong>{{p.Detalle}}
+                    
+                    <br>
+                    <strong style="font-weight: bold; color: blue;">Detalles:</strong>{{p.masDetalle}}
+                   </div>
+                </ion-label>
+            </ion-item>
+
+            <!--opciones de eliminar y editar-->
+
+            <ion-item-options>
+             
+            <ion-item-option (click)=" addUpdateProduct(p)">
+                <ion-icon class="option-btn"  name="create-outline"></ion-icon>
+            </ion-item-option>
+            
+            <ion-item-option (click)="confirmDeleteProduct(p)" color="danger">
+                <ion-icon class="option-btn"  name="trash-outline"></ion-icon>
+            </ion-item-option>
+            </ion-item-options>
+
+
+    
+
+        </ion-item-sliding>
+    </ion-list>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="addUpdateProduct()">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>

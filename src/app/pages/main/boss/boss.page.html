@@ -1,0 +1,27 @@
+<app-header [showMenu]="true" title="Monstruos"></app-header>
+
+<ion-content class="ion-padding">
+  <!-- Spinner de carga mientras obtenemos los datos -->
+  <ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
+
+  <!-- Mostrar los datos de los bosses -->
+  <div *ngIf="!isLoading && bosses?.length">
+    <ion-list>
+      <ion-item *ngFor="let boss of bosses">
+        <ion-avatar slot="start">
+          <img *ngIf="boss.image" [src]="boss.image" alt="{{ boss.name }}" />
+        </ion-avatar>
+
+        <ion-label>
+          <h2>{{ boss.name }}</h2>
+          <p>{{ boss.description }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <!-- Si no hay bosses -->
+  <div *ngIf="!isLoading && !bosses?.length">
+    <p>No se encontraron bosses.</p>
+  </div>
+</ion-content>

@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Página no encontrada</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="ion-padding text-center">
+    <img src="assets/images/e404.svg" alt="Página no encontrada" class="error-image"/>
+    <h2>Error 404</h2>
+    <p>La página que buscas no se encuentra disponible.</p>
+
+    <!-- Campo de entrada para la descripción del error -->
+    <ion-input 
+    [(ngModel)]="errorDescription" 
+    placeholder="Describe el error aquí" 
+    lines="6" 
+    class="error-input">
+  </ion-input>
+
+    <!-- Botón para enviar correo con detalles -->
+    <ion-button expand="block" class="ion-margin-top" (click)="sendErrorEmail()">
+      Enviar reporte del error
+    </ion-button>
+
+    <ion-button expand="block" class="ion-margin-top" routerLink="/auth">
+      Volver al Inicio
+    </ion-button>
+  </div>
+</ion-content>

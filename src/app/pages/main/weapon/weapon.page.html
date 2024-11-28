@@ -1,0 +1,27 @@
+<app-header [showMenu]="true" title="Armas"></app-header>
+
+<ion-content class="ion-padding">
+    <!-- Spinner de carga mientras obtenemos los datos -->
+    <ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
+  
+    <!-- Mostrar los datos de las armas -->
+    <div *ngIf="!isLoading && weapons?.length">
+      <ion-list>
+        <ion-item *ngFor="let weapon of weapons">
+          <ion-avatar slot="start">
+            <img *ngIf="weapon.image" [src]="weapon.image" alt="{{ weapon.name }}" />
+          </ion-avatar>
+  
+          <ion-label>
+            <h2>{{ weapon.name }}</h2>
+            <p>{{ weapon.description }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+  
+    <!-- Si no hay armas -->
+    <div *ngIf="!isLoading && !weapons?.length">
+      <p>No se encontraron armas.</p>
+    </div>
+  </ion-content>

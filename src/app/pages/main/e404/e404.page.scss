@@ -1,0 +1,22 @@
+.error-container h1 {
+    font-size: 5rem;
+    color: var(--ion-color-danger);
+  }
+  .error-container p {
+    font-size: 1.2rem;
+    color: var(--ion-text-color);
+  }
+  ion-input {
+    font-size: 16px; /* Tamaño de fuente más grande */
+    height: 150px; /* Ajusta la altura para hacerlo más grande */
+    padding: 10px; /* Añadir espacio alrededor del texto */
+  }
+  .error-input {
+    font-size: 16px; /* Tamaño de la fuente */
+    height: 150px;   /* Ajustar la altura */
+    padding: 10px;   /* Añadir espacio alrededor del texto */
+    border: 2px solid #4CAF50; /* Borde de 2px de color verde */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Sombra suave alrededor del borde */
+  }
+  
