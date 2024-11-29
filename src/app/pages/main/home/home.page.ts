@@ -68,8 +68,8 @@ doRefresh(event) {
 
 async confirmDeleteProduct(product:Product) {
 this.utilsSvc.presentAlert({
-    header: 'Eliminar foto!',
-    message: '¿Quieres eliminar la foto?',
+    header: '¡Eliminar foto!',
+    message: '¿Quieres eliminar el dato?',
     mode:'ios',
     buttons: [
       {
@@ -105,7 +105,7 @@ this.utilsSvc.presentAlert({
       this.products=this.products.filter(p=>p.id!==product.id);
 
     this.utilsSvc.presentToast({
-        message:'Foto Eliminado Exitosamente',
+        message:'Dato Eliminado Exitosamente',
         duration:1500,
         color:'success',
         position:'middle',

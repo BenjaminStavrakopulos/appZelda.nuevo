@@ -11,6 +11,8 @@ export class WeaponPage {
   loading: any;
   weapons: any[] = []; // Almacena la lista de armas
   isLoading: boolean = true; // Para controlar el estado de carga
+  translateApiKey: string = 'TU_CLAVE_API'; // Clave de la API de traducción
+  translateApiUrl: string = 'https://translation.googleapis.com/language/translate/v2'; // URL de Google Translate API
 
   constructor(
     private http: HttpClient,
@@ -31,7 +33,8 @@ export class WeaponPage {
 
     this.http.get<any>(apiUrl).subscribe(
       async (response) => {
-        this.weapons = response.data; // Almacena los datos de las armas
+        const weapons = response.data; // Obtén los datos de las armas
+        this.weapons = await this.translateWeapons(weapons); // Traduce los datos
         this.isLoading = false; // Deja de mostrar el indicador de carga
         await this.loading.dismiss();
       },
@@ -42,6 +45,39 @@ export class WeaponPage {
         this.presentToast('Error al cargar las armas. Verifica tu conexión o la URL de la API.', 'top', 3000);
       }
     );
+  }
+
+  // Método para traducir la lista de armas
+  async translateWeapons(weapons: any[]): Promise<any[]> {
+    const translatedWeapons = await Promise.all(
+      weapons.map(async (weapon: any) => {
+        const translatedName = await this.translateText(weapon.name, 'es'); // Traduce el nombre
+        const translatedDescription = await this.translateText(weapon.description || '', 'es'); // Traduce la descripción
+        return {
+          ...weapon,
+          name: translatedName,
+          description: translatedDescription,
+        };
+      })
+    );
+    return translatedWeapons;
+  }
+
+  // Método para traducir texto usando la API de Google Translate
+  async translateText(text: string, targetLanguage: string): Promise<string> {
+    const body = {
+      q: text,
+      target: targetLanguage,
+      key: this.translateApiKey,
+    };
+
+    try {
+      const response: any = await this.http.post(this.translateApiUrl, body).toPromise();
+      return response.data.translations[0].translatedText;
+    } catch (error) {
+      console.error('Error al traducir el texto:', error);
+      return text; // En caso de error, devuelve el texto original
+    }
   }
 
   // Método para mostrar un Toast de error
